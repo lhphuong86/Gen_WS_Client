@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns="http://ws.paygate.tpb.com" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" targetNamespace="http://ws.paygate.tpb.com">
+    <wsdl:documentation>
+		Please Type your service description here
+	</wsdl:documentation>
+    <wsdl:types>
+        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://ws.paygate.tpb.com">
+            <xs:element name="GetClientIPResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="processRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="xRefID" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="code" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="message" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="processRequestResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="log">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="msg" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="processRequestRequest">
+        <wsdl:part name="parameters" element="ns:processRequest"/>
+    </wsdl:message>
+    <wsdl:message name="processRequestResponse">
+        <wsdl:part name="parameters" element="ns:processRequestResponse"/>
+    </wsdl:message>
+    <wsdl:message name="GetClientIPRequest"/>
+    <wsdl:message name="GetClientIPResponse">
+        <wsdl:part name="parameters" element="ns:GetClientIPResponse"/>
+    </wsdl:message>
+    <wsdl:message name="logRequest">
+        <wsdl:part name="parameters" element="ns:log"/>
+    </wsdl:message>
+    <wsdl:portType name="EBGProcessorPortType">
+        <wsdl:operation name="processRequest">
+            <wsdl:input message="ns:processRequestRequest" wsaw:Action="urn:processRequest"/>
+            <wsdl:output message="ns:processRequestResponse" wsaw:Action="urn:processRequestResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetClientIP">
+            <wsdl:input message="ns:GetClientIPRequest" wsaw:Action="urn:GetClientIP"/>
+            <wsdl:output message="ns:GetClientIPResponse" wsaw:Action="urn:GetClientIPResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="log">
+            <wsdl:input message="ns:logRequest" wsaw:Action="urn:log"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="EBGProcessorSoap11Binding" type="ns:EBGProcessorPortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="processRequest">
+            <soap:operation soapAction="urn:processRequest" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetClientIP">
+            <soap:operation soapAction="urn:GetClientIP" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="log">
+            <soap:operation soapAction="urn:log" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="EBGProcessorSoap12Binding" type="ns:EBGProcessorPortType">
+        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="processRequest">
+            <soap12:operation soapAction="urn:processRequest" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetClientIP">
+            <soap12:operation soapAction="urn:GetClientIP" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="log">
+            <soap12:operation soapAction="urn:log" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="EBGProcessorHttpBinding" type="ns:EBGProcessorPortType">
+        <http:binding verb="POST"/>
+        <wsdl:operation name="processRequest">
+            <http:operation location="EBGProcessor/processRequest"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="processRequest"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="processRequest"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetClientIP">
+            <http:operation location="EBGProcessor/GetClientIP"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="GetClientIP"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="GetClientIP"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="log">
+            <http:operation location="EBGProcessor/log"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="log"/>
+            </wsdl:input>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="EBGProcessor">
+        <wsdl:port name="EBGProcessorHttpSoap11Endpoint" binding="ns:EBGProcessorSoap11Binding">
+            <soap:address location="http://10.1.17.123:8091/TPBGateway/services/EBGProcessor.EBGProcessorHttpSoap11Endpoint"/>
+        </wsdl:port>
+        <wsdl:port name="EBGProcessorHttpSoap12Endpoint" binding="ns:EBGProcessorSoap12Binding">
+            <soap12:address location="http://10.1.17.123:8091/TPBGateway/services/EBGProcessor.EBGProcessorHttpSoap12Endpoint"/>
+        </wsdl:port>
+        <wsdl:port name="EBGProcessorHttpEndpoint" binding="ns:EBGProcessorHttpBinding">
+            <http:address location="http://10.1.17.123:8091/TPBGateway/services/EBGProcessor.EBGProcessorHttpEndpoint"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
